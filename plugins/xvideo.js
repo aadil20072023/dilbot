@@ -16,7 +16,7 @@ cmd({
     try {
         if (!q) return reply('⭕ *Please Provide Search Terms.*');
 
-        let res = await fetchJson(`https://www.eporner.com/api/v2/video/search?query=${q}`);
+        let res = await fetchJson(`https://raganork-network.vercel.app/api/xvideos/search?query=${q}`);
         
         if (!res || !res.result || res.result.length === 0) return reply("N_FOUND");
 
@@ -24,7 +24,7 @@ cmd({
         
         if (data.length < 1) return await messageHandler.sendMessage(from, { text: "⭕ *I Couldn't Find Anything 🙄*" }, { quoted: quotedMessage });
 
-        let message = `*🔞 AGRAZE XVIDEO DOWNLOADER 🔞*\n\n`;
+        let message = `*🔞 QUEEN NETHU MD XVIDEO DOWNLOADER 🔞*\n\n`;
         let options = '';
 
         data.forEach((v, index) => {
@@ -32,7 +32,7 @@ cmd({
         });
         
         message += options;
-        message += `> ⚜️ _𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝_ *- :* *_AGRAZE__ ᵀᴹ*\n\n`;
+        message += `> ⚜️ _𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝_ *- :* *_SL NETHU MAX_ ᵀᴹ*\n\n`;
 
         const sentMessage = await messageHandler.sendMessage(from, {
             image: { url: `https://i.ibb.co/ntvzPr8/s-Wuxk4b-KHr.jpg` },
@@ -65,7 +65,7 @@ cmd({
                 const selectedVideo = data[index];
 
                 try {
-                    let downloadRes = await fetchJson(`https://www.eporner.com/api/v2/video/download?url=${selectedVideo.url}`);
+                    let downloadRes = await fetchJson(`https://raganork-network.vercel.app/api/xvideos/download?url=${selectedVideo.url}`);
                     let videoUrl = downloadRes.url;
 
                     if (!videoUrl) {
@@ -74,7 +74,7 @@ cmd({
 
                     await messageHandler.sendMessage(from, {
                         video: { url: videoUrl },
-                        caption: `${selectedVideo.title}\n\n> ⚜️ _𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝_ *- :* *_AGRAZE_ ᵀᴹ*`
+                        caption: `${selectedVideo.title}\n\n> ⚜️ _𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝_ *- :* *_SL NETHU MAX_ ᵀᴹ*`
                     });
 
                 } catch (err) {
