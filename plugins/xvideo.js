@@ -16,7 +16,7 @@ cmd({
     try {
         if (!q) return reply('⭕ *Please Provide Search Terms.*');
 
-        let res = await fetchJson(`https://www.eporner.com/api/v2/video/search/?query=${q}`);
+        let res = await fetchJson(`https://www.eporner.com/api/v2/video/search?query=${q}`);
         
         if (!res || !res.result || res.result.length === 0) return reply("N_FOUND");
 
@@ -65,7 +65,7 @@ cmd({
                 const selectedVideo = data[index];
 
                 try {
-                    let downloadRes = await fetchJson(`https://raganork-network.vercel.app/api/xvideos/download?url=${selectedVideo.url}`);
+                    let downloadRes = await fetchJson(`https://www.eporner.com/api/v2/video/download?url=${selectedVideo.url}`);
                     let videoUrl = downloadRes.url;
 
                     if (!videoUrl) {
