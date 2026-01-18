@@ -16,7 +16,7 @@ cmd({
     try {
         if (!q) return reply('⭕ *Please Provide Search Terms.*');
 
-        let res = await fetchJson(`https://raganork-network.vercel.app/api/xvideos/search?query=${q}`);
+        let res = await fetchJson(`https://www.eporner.com/api/v2/video/search/?query=${q}`);
         
         if (!res || !res.result || res.result.length === 0) return reply("N_FOUND");
 
