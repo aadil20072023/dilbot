@@ -40,6 +40,7 @@
     "@vreden/youtube_scraper": "^1.2.8",
     "sadaslk-dlcore": "^1.0.0",
     "abir-photo360-apis": "^1.0.2",
+    "@vitalets/google-translate-api": "^9.2.1",
     "puppeteer" : "^24.35.0"
     
 
