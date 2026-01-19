@@ -6,45 +6,36 @@ cmd(
     pattern: "imgsearch",
     alias: ["image", "pic", "photo"],
     react: "🔍",
-    desc: "Search images from the internet",
+    desc: "Search images (stable)",
     category: "search",
     filename: __filename,
   },
   async (conn, mek, m, { from, q, reply }) => {
     try {
       if (!q) {
-        return reply("*🔍 Please enter what image you want to search*\n\nExample:\n/imgsearch cute cat");
+        return reply("*🔍 Please enter a search query*\nExample:\n/imgsearch cat");
       }
 
-      reply("*🔎 Searching images... Please wait*");
+      reply("*🔎 Searching images...*");
 
-      // DuckDuckGo image API (NO API KEY NEEDED)
-      const url = `https://duckduckgo.com/?q=${encodeURIComponent(q)}&iax=images&ia=images`;
-      const tokenRes = await axios.get(url);
-      const token = tokenRes.data.match(/vqd='([^']+)'/);
+      // STABLE PUBLIC IMAGE SEARCH API
+      const res = await axios.get(
+        `https://api.popcat.xyz/images?q=${encodeURIComponent(q)}`
+      );
 
-      if (!token) return reply("*❌ Failed to fetch images*");
-
-      const api = `https://duckduckgo.com/i.js?l=us-en&o=json&q=${encodeURIComponent(
-        q
-      )}&vqd=${token[1]}&f=,,,&p=1`;
-
-      const res = await axios.get(api, {
-        headers: { "User-Agent": "Mozilla/5.0" }
-      });
-
-      const images = res.data.results.slice(0, 5);
-
-      if (!images.length) {
+      if (!res.data || !res.data.images || res.data.images.length === 0) {
         return reply("*❌ No images found*");
       }
+
+      // Send up to 5 images
+      const images = res.data.images.slice(0, 5);
 
       for (const img of images) {
         await conn.sendMessage(
           from,
           {
-            image: { url: img.image },
-            caption: `🖼️ *Image Search*\n\n🔎 Query: ${q}`
+            image: { url: img },
+            caption: `🖼️ *Image Search*\n🔎 Query: ${q}`
           },
           { quoted: mek }
         );
@@ -54,7 +45,7 @@ cmd(
 
     } catch (e) {
       console.error(e);
-      reply(`*❌ Error:* ${e.message || e}`);
+      reply("*❌ Image search failed. Try again later.*");
     }
   }
 );
