@@ -1,7 +1,7 @@
 {
   "name": "DIL-BOT",
   "description": "Javascript WhatsApp bot made by Mohamed Aadil",
-  "logo": "https://github.com/aadil20072023/dilbot/blob/main/images/Welcome_dil_bot.png?raw=true",
+  "logo": "https://github.com/aadil20072023/dilbot/blob/main/images/welcome_dilbot.png?raw=true",
   "keywords": ["DIL-BOT"],
   "success_url": "/",
 
