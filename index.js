@@ -89,7 +89,7 @@ async function connectToWA() {
 
       const up = `DIL BOT connected ✅\n\nPREFIX: ${prefix}`;
       await dil.sendMessage(ownerNumber[0] + "@s.whatsapp.net", {
-        image: { url: `https://github.com/aadil20072023/dilbot/blob/main/images/Welcome_dil_bot.png?raw=true` },
+        image: { url: `https://github.com/aadil20072023/dilbot/blob/main/images/welcome_dilbot.png?raw=true` },
         caption: up
       });
 
