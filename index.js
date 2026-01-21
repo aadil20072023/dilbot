@@ -134,7 +134,7 @@ async function connectToWA() {
     const mek = messages[0];
     if (!mek || !mek.message) return;
 
-    mek.message = getContentType(mek.message) === 'ephemeralMessage' ? mek.message.ephemeralMessage.message : mek.message;
+   
     if (mek.key.remoteJid === 'status@broadcast') return;
 
     const m = sms(dil, mek);
@@ -197,7 +197,7 @@ async function connectToWA() {
   });
 
 
-  conn.ev.on('messages.update', async (updates) => {
+  test.ev.on('messages.update', async (updates) => {
     if (global.pluginHooks) {
       for (const plugin of global.pluginHooks) {
         if (plugin.onDelete) {
