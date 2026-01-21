@@ -1,11 +1,26 @@
 const {
+
   default: makeWASocket,
   useMultiFileAuthState,
   DisconnectReason,
   jidNormalizedUser,
   getContentType,
+  proto,
+  generateWAMessageContent,
+  generateWAMessage,
+  AnyMessageContent,
+  prepareWAMessageMedia,
+  areJidsSameUser,
+  downloadContentFromMessage,
+  MessageRetryMap,
+  generateForwardMessageContent,
+  generateWAMessageFromContent,
+  generateMessageID, makeInMemoryStore,
+  jidDecode,
   fetchLatestBaileysVersion,
   Browsers
+
+
 } = require('@whiskeysockets/baileys');
 
 const fs = require('fs');
@@ -61,6 +76,12 @@ async function ensureSessionFile() {
     }, 1000);
   }
 }
+
+
+const antiDeletePlugin = require('./plugins/antidelete.js');
+global.pluginHooks = global.pluginHooks || [];
+global.pluginHooks.push(antiDeletePlugin);
+
 
 async function connectToWA() {
   console.log("Connecting DIl BOT 🤖...");
@@ -174,7 +195,23 @@ async function connectToWA() {
       }
     }
   });
+
+
+  conn.ev.on('messages.update', async (updates) => {
+    if (global.pluginHooks) {
+      for (const plugin of global.pluginHooks) {
+        if (plugin.onDelete) {
+          try {
+            await plugin.onDelete(conn, updates);
+          } catch (e) {
+            console.log("onDelete error:", e);
+          }
+        }
+      }
+    }
+  });
 }
+
 
 ensureSessionFile();
 
