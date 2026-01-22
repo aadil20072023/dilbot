@@ -133,8 +133,7 @@ async function connectToWA() {
 
     const mek = messages[0];
     if (!mek || !mek.message) return;
-     mek.message = getContentType(mek.message) === 'ephemeralMessage' ? mek.message.ephemeralMessage.message : mek.message;
-
+    
    
     if (mek.key.remoteJid === 'status@broadcast') return;
 
@@ -181,6 +180,9 @@ async function connectToWA() {
         }
       }
     }
+
+     mek.message = getContentType(mek.message) === 'ephemeralMessage' ? mek.message.ephemeralMessage.message : mek.message;
+
 
     const replyText = body;
     for (const handler of replyHandlers) {
